@@ -18,6 +18,7 @@ const products = [
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
 
   return (
@@ -33,12 +34,23 @@ export default function Home() {
           <a href="#store" onClick={() => setMenuOpen(false)}>La boutique</a>
         </nav>
         <div className="header-actions">
+          <button className="search-button" onClick={() => setSearchOpen(true)}>Recherche</button>
           <button className="cart" aria-label={`Panier, ${cartCount} articles`}>Panier <span>{cartCount}</span></button>
           <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Ouvrir le menu">
             <i></i><i></i>
           </button>
         </div>
       </header>
+
+      {searchOpen && (
+        <div className="search-panel" role="dialog" aria-modal="true" aria-label="Recherche de produits">
+          <button className="search-close" onClick={() => setSearchOpen(false)} aria-label="Fermer la recherche">Fermer ×</button>
+          <form action="/produits" className="search-form">
+            <label htmlFor="search">Que recherchez-vous ?</label>
+            <div><input id="search" name="q" autoFocus placeholder="Sérum, solaire, hydratant…" /><button type="submit">Rechercher ↗</button></div>
+          </form>
+        </div>
+      )}
 
       <section className="hero" id="top">
         <img src="/brand/storefront.png" alt="La boutique Skin by Yas à Agadir, éclairée le soir" />
@@ -100,7 +112,7 @@ export default function Home() {
       <section className="nails section" id="nails">
         <div className="nails-card">
           <div className="nails-image"><img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=1400&q=85" alt="Manucure naturelle aux tons doux" /></div>
-          <div className="nails-copy"><p className="kicker">03 — Studio Nails</p><h2>Des mains<br /><em>qui parlent.</em></h2><p>Manucure soignée, couleurs naturelles et détails délicats — dans l’univers chaleureux de Skin by Yas.</p><a href="#store" className="button secondary">Prendre rendez-vous <span>↗</span></a></div>
+          <div className="nails-copy"><p className="kicker">03 — SKIN BY YAS NAILS</p><h2>Votre espace Nails<br /><em>à Agadir.</em></h2><p>Manucure soignée, couleurs naturelles et détails délicats — dans l’univers chaleureux de Skin by Yas.</p><a href="#store" className="button secondary">Réserver <span>↗</span></a></div>
         </div>
       </section>
 
