@@ -1,0 +1,4 @@
+import type { Metadata } from "next";
+import { CommercePage } from "../components/CommercePage";
+export const metadata: Metadata = { title: "Onglerie & Nails à Agadir | Skin by Yas", description: "Découvrez l’espace Nails de Skin by Yas à Agadir et consultez les prestations actuellement disponibles." };
+export default function Page(){ return <CommercePage eyebrow="SKIN BY YAS NAILS" title="Votre espace Nails à Agadir" intro="Découvrez l’espace Nails de Skin by Yas à Agadir et consultez les prestations actuellement disponibles." categoryLinks={false}><div className="nails-service-layout"><div><p className="kicker">PRESTATIONS</p><h2>Notre espace Nails</h2><p className="inner-copy">La liste des prestations et le mode de réservation ne sont pas encore publiés sur le site.</p><button className="button secondary" disabled>Réserver</button></div><div className="nails-page-brand"><img src="/brand/logo.jpg" alt="Skin by Yasmine Agadir" /></div></div></CommercePage>; }

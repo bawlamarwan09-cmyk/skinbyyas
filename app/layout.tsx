@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Skin by Yas — Parapharmacie, Skincare & Nails à Agadir",
-  description: "Votre peau, mais en mieux. Découvrez la sélection skincare, beauté et nails de Skin by Yas à Agadir.",
+  title: "Skin by Yas Agadir | Parapharmacie, Skincare & Nails",
+  description: "Découvrez Skin by Yas à Agadir : produits skincare, soins cheveux, soins corps, protections solaires et espace nails.",
   icons: { icon: "/brand/logo.jpg" },
   metadataBase: new URL("https://skin-by-yas-agadir.bawlamarwan09.chatgpt.site"),
   openGraph: {
