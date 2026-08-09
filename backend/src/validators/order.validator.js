@@ -1,0 +1,5 @@
+import { z } from "zod";
+import { email, phone, pageQuery } from "./common.js";
+export const orderCreateSchema=z.object({body:z.object({customer:z.object({name:z.string().trim().min(2).max(160),phone,email:email.optional(),address:z.string().trim().min(3).max(500),city:z.string().trim().min(2).max(100)}),items:z.array(z.object({productId:z.string().min(1),quantity:z.number().int().positive().max(100)})).min(1).max(100),notes:z.string().max(2000).optional(),paymentMethod:z.enum(["CASH_ON_DELIVERY","OTHER"])}),query:z.any().optional(),params:z.any().optional()});
+export const orderStatusSchema=z.object({body:z.object({status:z.enum(["PENDING","CONFIRMED","PROCESSING","SHIPPED","DELIVERED","CANCELLED"]),paymentStatus:z.enum(["PENDING","PAID","FAILED","REFUNDED"]).optional()}),params:z.object({id:z.string()}),query:z.any().optional()});
+export const adminOrderListSchema=z.object({body:z.any().optional(),params:z.any().optional(),query:pageQuery.extend({status:z.enum(["PENDING","CONFIRMED","PROCESSING","SHIPPED","DELIVERED","CANCELLED"]).optional(),date:z.string().date().optional(),search:z.string().trim().max(100).optional()})});

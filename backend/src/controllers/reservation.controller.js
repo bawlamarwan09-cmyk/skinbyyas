@@ -1,0 +1,6 @@
+import { prisma } from "../config/prisma.js";
+import { AppError,ok,pagination } from "../utils/api.js";
+export async function createReservation(req,res){const date=new Date(`${req.body.date}T00:00:00.000Z`);if(date<new Date(new Date().toISOString().slice(0,10)))throw new AppError(400,"INVALID_DATE","La date de réservation est passée.");ok(res,await prisma.reservation.create({data:{...req.body,date}}),201);}
+export async function listReservations(req,res){const {page,limit,status,date}=req.query;const where={...(status&&{status}),...(date&&{date:new Date(`${date}T00:00:00.000Z`)})};const [data,total]=await prisma.$transaction([prisma.reservation.findMany({where,orderBy:[{date:"asc"},{time:"asc"}],skip:(page-1)*limit,take:limit}),prisma.reservation.count({where})]);ok(res,{data,pagination:pagination(page,limit,total)});}
+export async function getReservation(req,res){const item=await prisma.reservation.findUnique({where:{id:req.params.id}});if(!item)throw new AppError(404,"RESERVATION_NOT_FOUND","Réservation introuvable.");ok(res,item);}
+export async function updateReservationStatus(req,res){ok(res,await prisma.reservation.update({where:{id:req.params.id},data:{status:req.body.status}}));}

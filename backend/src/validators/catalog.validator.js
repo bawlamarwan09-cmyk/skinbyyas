@@ -1,0 +1,14 @@
+import { z } from "zod";
+import { slug, money, optionalMoney, pageQuery } from "./common.js";
+const image = z.object({ url:z.string().url(), alt:z.string().max(240).nullish(), position:z.number().int().nonnegative().default(0) });
+export const productBody = z.object({ name:z.string().trim().min(2).max(200), slug, description:z.string().max(20000).nullish(), price:money, compareAtPrice:optionalMoney, sku:z.string().trim().max(100).nullish(), stock:z.number().int().nonnegative(), isActive:z.boolean().default(true), isFeatured:z.boolean().default(false), categoryId:z.string().min(1), brandId:z.string().min(1).nullish(), seoTitle:z.string().max(200).nullish(), seoDescription:z.string().max(320).nullish(), images:z.array(image).max(12).default([]) });
+export const productCreateSchema = z.object({ body:productBody, query:z.any().optional(), params:z.any().optional() });
+export const productUpdateSchema = z.object({ body:productBody.partial().refine(v=>Object.keys(v).length>0,"Aucune modification fournie."), params:z.object({id:z.string()}), query:z.any().optional() });
+export const productStatusSchema = z.object({ body:z.object({ isActive:z.boolean() }), params:z.object({id:z.string()}), query:z.any().optional() });
+export const productListSchema = z.object({ body:z.any().optional(), params:z.any().optional(), query:pageQuery.extend({ category:z.string().optional(), brand:z.string().optional(), search:z.string().trim().max(100).optional(), minPrice:z.coerce.number().nonnegative().optional(), maxPrice:z.coerce.number().nonnegative().optional(), sort:z.enum(["newest","price_asc","price_desc","name"]).default("newest") }) });
+const taxonomy = z.object({ name:z.string().trim().min(2).max(120), slug, description:z.string().max(5000).nullish(), image:z.string().url().nullish(), seoTitle:z.string().max(200).nullish(), seoDescription:z.string().max(320).nullish(), isActive:z.boolean().default(true) });
+export const categoryCreateSchema=z.object({body:taxonomy,query:z.any().optional(),params:z.any().optional()});
+export const categoryUpdateSchema=z.object({body:taxonomy.partial().refine(v=>Object.keys(v).length>0),params:z.object({id:z.string()}),query:z.any().optional()});
+const brand=taxonomy.omit({image:true}).extend({logo:z.string().url().nullish()});
+export const brandCreateSchema=z.object({body:brand,query:z.any().optional(),params:z.any().optional()});
+export const brandUpdateSchema=z.object({body:brand.partial().refine(v=>Object.keys(v).length>0),params:z.object({id:z.string()}),query:z.any().optional()});

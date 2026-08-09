@@ -1,0 +1,2 @@
+import { Router } from "express";import { login } from "../controllers/auth.controller.js";import { validate } from "../middleware/validate.middleware.js";import { loginLimiter } from "../middleware/rate-limit.middleware.js";import { loginSchema } from "../validators/auth.validator.js";import { asyncHandler } from "../utils/api.js";
+export const authRouter=Router();authRouter.post("/login",loginLimiter,validate(loginSchema),asyncHandler(login));

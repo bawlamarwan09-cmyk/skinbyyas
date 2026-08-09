@@ -1,0 +1,10 @@
+import { z } from "zod";
+export const slug = z.string().min(2).max(160).regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Slug invalide.");
+export const id = z.string().min(1);
+export const money = z.union([z.string(), z.number()]).transform(String).refine(v => /^\d+(\.\d{1,2})?$/.test(v), "Montant invalide.");
+export const optionalMoney = money.nullish();
+export const phone = z.string().trim().min(6).max(30);
+export const email = z.string().email().max(254);
+export const pageQuery = z.object({ page:z.coerce.number().int().positive().default(1), limit:z.coerce.number().int().positive().max(100).default(20) }).passthrough();
+export const paramsId = z.object({ params:z.object({ id }), body:z.any().optional(), query:z.any().optional() });
+export const paramsSlug = z.object({ params:z.object({ slug }), body:z.any().optional(), query:z.any().optional() });
