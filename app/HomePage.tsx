@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { HomeArticles, HomeBrands, HomeProducts } from "./components/StoreData";
+import { SiteFooter, SiteHeader } from "./components/SiteChrome";
 
 const categories = [
   { name: "Skincare", href: "/skincare", image: "https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=1200&q=88" },
@@ -61,9 +62,6 @@ function OpeningAnimation(){
 }
 
 export default function HomePage() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
-
   const storeSchema = {
     "@context": "https://schema.org",
     "@type": "Store",
@@ -77,15 +75,7 @@ export default function HomePage() {
   return <div className="shop-home">
     <OpeningAnimation/>
     <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(storeSchema)}} />
-    <header className="shop-header">
-      <a href="/" className="shop-logo" aria-label="Skin by Yas — accueil"><img src="/brand/logo.jpg" alt="Skin by Yasmine Agadir" /></a>
-      <nav className={menuOpen ? "shop-nav open" : "shop-nav"} aria-label="Navigation principale">
-        <a href="/">Accueil</a><a href="/produits">Boutique</a><a href="/skincare">Skincare</a><a href="/soins-cheveux">Cheveux</a><a href="/soins-corps">Corps</a><a href="/solaires">Solaires</a><a href="/nails-agadir">Nails</a><a href="/conseils">Conseils</a>
-      </nav>
-      <div className="shop-actions"><button onClick={() => setSearchOpen(true)}>Recherche</button><a href="/produits">Panier <span>0</span></a><button className="shop-menu" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Ouvrir le menu"><i></i><i></i></button></div>
-    </header>
-
-    {searchOpen && <div className="search-panel" role="dialog" aria-modal="true" aria-label="Recherche de produits"><button className="search-close" onClick={() => setSearchOpen(false)}>Fermer ×</button><form action="/produits" className="search-form"><label htmlFor="search">Que recherchez-vous ?</label><div><input id="search" name="q" autoFocus placeholder="Rechercher dans la boutique"/><button type="submit">Rechercher ↗</button></div></form></div>}
+    <SiteHeader />
 
     <main>
       <section className="shop-hero">
@@ -116,6 +106,6 @@ export default function HomePage() {
     <section className="shop-store"><div><p className="shop-eyebrow">AGADIR, MAROC</p><h2>Retrouvez Skin by Yas à Agadir</h2><p>Parapharmacie, skincare et Nails réunis dans l’univers Skin by Yas.</p><a href="/parapharmacie-agadir" className="shop-button secondary">En savoir plus <span>↗</span></a></div></section>
     </main>
 
-    <footer className="shop-footer"><div className="shop-footer-brand"><img src="/brand/logo.jpg" alt="Skin by Yasmine Agadir"/><p>Parapharmacie, skincare &amp; beauté à Agadir.</p></div><div><h3>Boutique</h3><a href="/produits">Produits</a><a href="/skincare">Skincare</a><a href="/soins-cheveux">Cheveux</a><a href="/soins-corps">Corps</a><a href="/solaires">Solaires</a></div><div><h3>Skin by Yas</h3><a href="/parapharmacie-agadir">À propos</a><a href="/nails-agadir">Nails</a><a href="/conseils">Conseils</a></div><div><h3>Localisation</h3><p>Agadir, Maroc</p></div><small>© 2026 SKIN BY YAS</small></footer>
+    <SiteFooter />
   </div>;
 }
