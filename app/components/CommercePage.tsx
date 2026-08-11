@@ -1,4 +1,5 @@
 type CategoryLink = { name: string; href: string };
+import { CartCount } from "./StoreData";
 
 const categories: CategoryLink[] = [
   { name: "Skincare", href: "/skincare" },
@@ -8,7 +9,7 @@ const categories: CategoryLink[] = [
 ];
 
 export function CommerceHeader() {
-  return <header className="inner-header"><a href="/" className="brand"><img src="/brand/logo.jpg" alt="Skin by Yasmine Agadir" /></a><nav><a href="/produits">Produits</a><a href="/marques">Marques</a><a href="/conseils">Conseils</a><a href="/nails-agadir">Nails</a></nav><a href="/produits" className="inner-cart">Panier <span>0</span></a></header>;
+  return <header className="inner-header"><a href="/" className="brand"><img src="/brand/logo.jpg" alt="Skin by Yasmine Agadir" /></a><nav><a href="/produits">Produits</a><a href="/marques">Marques</a><a href="/conseils">Conseils</a><a href="/nails-agadir">Nails</a></nav><a href="/produits" className="inner-cart">Panier <CartCount/></a></header>;
 }
 
 export function CommerceFooter() {
