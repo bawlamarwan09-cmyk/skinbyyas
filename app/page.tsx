@@ -13,5 +13,8 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <HomePage />;
+  return <>
+    <script dangerouslySetInnerHTML={{__html: `try{if(sessionStorage.getItem("sby_intro_seen")){document.documentElement.classList.add("sby-intro-seen")}}catch(e){}`}} />
+    <HomePage />
+  </>;
 }

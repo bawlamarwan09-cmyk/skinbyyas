@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { HomeArticles, HomeBrands, HomeProducts } from "./components/StoreData";
 
 const categories = [
@@ -13,12 +13,14 @@ const categories = [
 function OpeningAnimation(){
   const [visible, setVisible] = useState(true);
   const [leaving, setLeaving] = useState(false);
+  const removalTimer = useRef<number | null>(null);
 
   function finish() {
+    if (leaving) return;
     sessionStorage.setItem("sby_intro_seen", "1");
     setLeaving(true);
     document.body.style.overflow = "";
-    window.setTimeout(() => setVisible(false), 700);
+    removalTimer.current = window.setTimeout(() => setVisible(false), 650);
   }
 
   useEffect(() => {
@@ -29,19 +31,32 @@ function OpeningAnimation(){
     }
 
     document.body.style.overflow = "hidden";
-    const timer = window.setTimeout(finish, 4200);
+    const timer = window.setTimeout(finish, 4350);
     return () => {
       window.clearTimeout(timer);
+      if (removalTimer.current) window.clearTimeout(removalTimer.current);
       document.body.style.overflow = "";
     };
   }, []);
 
   if (!visible) return null;
 
-  return <div className={`opening-animation${leaving ? " leaving" : ""}`} aria-label="Bienvenue chez Skin by Yas">
-    <div className="opening-logo"><img src="/brand/logo.jpg" alt="Skin by Yasmine — Agadir" /></div>
-    <div className="opening-store"><img src="/brand/storefront.png" alt="Boutique Skin by Yas à Agadir" /><div></div><span>SKINCARE · SELFCARE · BEAUTY</span></div>
-    <button type="button" onClick={finish}>Passer</button>
+  return <div className={`opening-animation${leaving ? " leaving" : ""}`} aria-label="Introduction Skin by Yas">
+    <div className="opening-scene opening-brand-scene">
+      <div className="opening-brand-mark">
+        <img src="/brand/logo.jpg" alt="Skin by Yas" />
+        <p>Parapharmacie &amp; Skincare<span>Agadir</span></p>
+      </div>
+    </div>
+    <div className="opening-scene opening-storefront-scene">
+      <img src="/brand/intro-storefront.jpg" alt="Façade de la boutique Skin by Yas à Agadir" fetchPriority="high" />
+      <span aria-hidden="true" />
+    </div>
+    <div className="opening-scene opening-interior-scene">
+      <img src="/brand/intro-interior.jpg" alt="Accueil et rayons skincare de la boutique Skin by Yas" fetchPriority="high" />
+      <span aria-hidden="true" />
+    </div>
+    <button type="button" onClick={finish} aria-label="Passer l’introduction">Passer</button>
   </div>;
 }
 
