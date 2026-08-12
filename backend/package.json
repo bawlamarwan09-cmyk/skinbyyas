@@ -11,6 +11,7 @@
     "migrate:dev": "prisma migrate dev",
     "migrate:deploy": "prisma migrate deploy",
     "admin:create": "node scripts/create-admin.js",
+    "articles:import": "node --experimental-strip-types scripts/import-articles.js",
     "check": "node scripts/check-syntax.js",
     "test": "node --test tests/*.test.js"
   },
