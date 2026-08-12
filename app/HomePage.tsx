@@ -103,7 +103,7 @@ export default function HomePage() {
 
     <HomeArticles />
 
-    <section className="shop-store"><div><p className="shop-eyebrow">AGADIR, MAROC</p><h2>Retrouvez Skin by Yas à Agadir</h2><p>Parapharmacie, skincare et Nails réunis dans l’univers Skin by Yas.</p><a href="/parapharmacie-agadir" className="shop-button secondary">En savoir plus <span>↗</span></a></div></section>
+    <section className="shop-store"><div className="shop-store-copy"><p className="shop-eyebrow">AGADIR, MAROC</p><h2>Retrouvez Skin by Yas à Agadir</h2><p>Parapharmacie, skincare et Nails réunis dans l’univers Skin by Yas.</p><a href="https://share.google/TN4FWEUdYyxXwBF4A" target="_blank" rel="noopener noreferrer" className="shop-button secondary">Ouvrir dans Google Maps <span>↗</span></a></div><div className="shop-store-map"><iframe src="https://www.google.com/maps?q=Skin%20by%20Yas%20Agadir&output=embed" title="Localisation de Skin by Yas à Agadir sur Google Maps" loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen></iframe></div></section>
     </main>
 
     <SiteFooter />
