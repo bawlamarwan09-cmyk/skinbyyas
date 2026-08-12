@@ -80,7 +80,7 @@ export default function HomePage() {
     <main>
       <section className="shop-hero">
         <div className="shop-hero-copy"><h1><span className="shop-hero-label">PARAPHARMACIE &amp; SKINCARE À AGADIR</span><span className="sr-only"> — </span><span className="shop-hero-title">Votre peau,<br/><em>en mieux.</em></span></h1><p className="shop-lead">Parapharmacie, skincare &amp; beauté à Agadir.</p><p className="shop-support">Découvrez nos produits skincare à Agadir, cosmétiques, soins cheveux, soins corps et protections solaires.</p><div className="shop-ctas"><a href="/produits" className="shop-button primary">Découvrir les produits beauté <span>↗</span></a><a href="#shop-categories" className="shop-button secondary">Voir nos catégories</a></div></div>
-        <div className="shop-hero-image"><img src="https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?auto=format&fit=crop&w=1800&q=90" alt="Sélection de produits skincare et cosmétiques Skin by Yas à Agadir"/></div>
+        <div className="shop-hero-image"><img src="/brand/intro-interior.jpg" alt="Accueil et rayons skincare de la boutique Skin by Yas à Agadir"/></div>
       </section>
 
     <section className="shop-section shop-categories" id="shop-categories">
