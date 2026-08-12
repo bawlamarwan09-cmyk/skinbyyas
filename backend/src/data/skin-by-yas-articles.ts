@@ -5,6 +5,7 @@ export type BlogArticle = {
   excerpt: string;
   seoTitle: string;
   metaDescription: string;
+  image: string;
   tags: string[];
   relatedLinks: { label: string; href: string }[];
   content: string;
@@ -15,6 +16,7 @@ export const articles: BlogArticle[] = [
     id: 1,
     title: "Quel est le meilleur soin visage pour peau grasse ?",
     slug: "meilleur-soin-visage-peau-grasse",
+    image: "/peau-grasse.webp",
     excerpt:
       "Découvrez comment prendre soin d’une peau grasse avec une routine simple : nettoyant doux, sérum adapté, hydratation légère et protection solaire.",
     seoTitle: "Meilleur soin visage pour peau grasse : routine et conseils",
@@ -93,6 +95,7 @@ Un SPF 50 à texture fluide ou légère est souvent plus confortable pour les pe
     id: 2,
     title: "Comment choisir sa crème selon son type de peau ?",
     slug: "choisir-creme-selon-type-peau",
+    image: "/choisir-creme-type-peau.webp",
     excerpt:
       "Peau sèche, grasse, mixte ou sensible : apprenez à choisir une crème hydratante adaptée aux besoins de votre peau.",
     seoTitle: "Comment choisir une crème selon son type de peau ?",
@@ -172,6 +175,7 @@ Le climat et l’exposition au soleil peuvent rendre les textures légères part
     id: 3,
     title: "Quel nettoyant CeraVe choisir ?",
     slug: "quel-nettoyant-cerave-choisir",
+    image: "/nettoyant-cerave.webp",
     excerpt:
       "Découvrez quel nettoyant CeraVe choisir selon votre type de peau : grasse, sèche, normale, mixte ou à imperfections.",
     seoTitle: "Quel nettoyant CeraVe choisir selon sa peau ?",
@@ -239,6 +243,7 @@ Cela dépend du produit choisi et de la tolérance de votre peau.
     id: 4,
     title: "Quelle crème solaire choisir au Maroc ?",
     slug: "quelle-creme-solaire-choisir-maroc",
+    image: "/creme-solaire-maroc.webp",
     excerpt:
       "SPF 50, peau grasse, sèche ou sensible : découvrez comment choisir une protection solaire adaptée au climat marocain.",
     seoTitle: "Quelle crème solaire choisir au Maroc ? Guide SPF 50",
@@ -316,6 +321,7 @@ Recherchez une texture fluide et légère.
     id: 5,
     title: "Quel sérum vitamine C choisir ?",
     slug: "quel-serum-vitamine-c-choisir",
+    image: "/serum-vitamine-c.webp",
     excerpt:
       "Découvrez comment choisir un sérum vitamine C et comment l’intégrer progressivement dans votre routine skincare.",
     seoTitle: "Quel sérum vitamine C choisir pour le visage ?",
@@ -384,6 +390,7 @@ Elle est couramment intégrée dans les routines destinées à améliorer l’ap
     id: 6,
     title: "CeraVe ou Bioderma pour peau grasse ?",
     slug: "cerave-ou-bioderma-peau-grasse",
+    image: "/cerave-vs-bioderma.webp",
     excerpt:
       "CeraVe ou Bioderma ? Comparez les deux marques selon les besoins d’une peau grasse, mixte ou à imperfections.",
     seoTitle: "CeraVe ou Bioderma pour peau grasse : que choisir ?",
@@ -451,6 +458,7 @@ Le meilleur choix dépend davantage de votre peau que du nom écrit sur le packa
     id: 7,
     title: "CeraVe ou La Roche-Posay pour peau grasse ?",
     slug: "cerave-ou-la-roche-posay-peau-grasse",
+    image: "/cerave-vs-la-roche-posay.webp",
     excerpt:
       "Comparez CeraVe et La Roche-Posay pour construire une routine simple adaptée aux peaux grasses et aux imperfections.",
     seoTitle: "CeraVe ou La Roche-Posay pour peau grasse ?",
@@ -506,6 +514,7 @@ Mais il faut toujours comparer les produits individuellement.
     id: 8,
     title: "Comment enlever les taches brunes du visage ?",
     slug: "comment-enlever-taches-brunes-visage",
+    image: "/taches-brunes-visage.webp",
     excerpt:
       "Découvrez les étapes essentielles d’une routine anti-taches : protection solaire, actifs ciblés, hydratation et régularité.",
     seoTitle: "Comment réduire les taches brunes du visage ?",
@@ -576,6 +585,7 @@ La protection solaire reste essentielle.
     id: 9,
     title: "Quelle routine pour une peau acnéique ?",
     slug: "routine-peau-acneique",
+    image: "/routine-peau-acneique.webp",
     excerpt:
       "Une routine simple pour peau à tendance acnéique : nettoyage doux, hydratation, protection solaire et soins ciblés.",
     seoTitle: "Routine peau acnéique : les étapes essentielles",
@@ -649,6 +659,7 @@ Les produits cosmétiques peuvent accompagner une routine mais ne remplacent pas
     id: 10,
     title: "Où acheter des produits K-Beauty au Maroc ?",
     slug: "ou-acheter-kbeauty-maroc",
+    image: "/kbeauty-maroc.webp",
     excerpt:
       "Découvrez comment choisir et acheter des produits skincare coréens au Maroc : COSRX, ANUA, Beauty of Joseon, SKIN1004 et plus.",
     seoTitle: "Où acheter des produits K-Beauty au Maroc ?",

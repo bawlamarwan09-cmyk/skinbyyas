@@ -76,6 +76,7 @@ for (const [index, article] of articles.entries()) {
     title: article.title,
     slug: article.slug,
     excerpt: article.excerpt,
+    coverImage: article.image,
     content,
     category: categoryFor(article),
     seoTitle: article.seoTitle,
