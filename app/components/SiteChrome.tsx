@@ -9,7 +9,7 @@ export function SiteHeader() {
 
   return <>
     <header className="shop-header">
-      <a href="/" className="shop-logo" aria-label="Skin by Yas — accueil"><img src="/brand/logo.jpg" alt="Skin by Yasmine Agadir" /></a>
+      <a href="/" className="shop-logo" aria-label="Skin by Yas — accueil"><img src="/brand/logo.png" alt="Skin by Yasmine Agadir" /></a>
       <nav className={menuOpen ? "shop-nav open" : "shop-nav"} aria-label="Navigation principale">
         <a href="/">Accueil</a><a href="/produits">Boutique</a><a href="/skincare">Skincare</a><a href="/soins-cheveux">Cheveux</a><a href="/soins-corps">Corps</a><a href="/solaires">Solaires</a><a href="/nails-agadir">Nails</a><a href="/conseils">Conseils</a>
       </nav>
