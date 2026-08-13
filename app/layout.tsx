@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./chrome.css";
+import "./cart.css";
+import "./nails-agadir/nails.css";
 
 export const metadata: Metadata = {
   title: "Skin by Yas Agadir | Parapharmacie, Skincare & Nails",

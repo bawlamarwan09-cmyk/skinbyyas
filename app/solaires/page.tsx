@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { CommercePage } from "../components/CommercePage";
-import { CatalogProducts } from "../components/StoreData";
+import { CategoryCatalogPage } from "../components/CategoryCatalogPage";
 export const metadata: Metadata = { title: "Crèmes & Protections Solaires à Agadir | Skin by Yas", description: "Découvrez les protections solaires disponibles chez Skin by Yas à Agadir et trouvez votre produit solaire en ligne." };
-export default function Page(){ return <CommercePage eyebrow="SKIN BY YAS — AGADIR" title="Protections & Crèmes Solaires à Agadir" intro="Découvrez notre sélection de protections solaires disponibles chez Skin by Yas et choisissez parmi les produits actuellement proposés sur notre boutique en ligne."><CatalogProducts category="solaires"/></CommercePage>; }
+export default function Page(){return <CategoryCatalogPage title="Protections & Crèmes Solaires à Agadir" intro="Découvrez notre sélection de protections solaires disponibles chez Skin by Yas." category="solaires"/>}

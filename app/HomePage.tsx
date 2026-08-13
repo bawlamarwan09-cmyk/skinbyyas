@@ -1,14 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { HomeArticles, HomeBrands, HomeProducts } from "./components/StoreData";
 import { SiteFooter, SiteHeader } from "./components/SiteChrome";
 
 const categories = [
-  { name: "Skincare", href: "/skincare", image: "https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=1200&q=88" },
-  { name: "Soins cheveux", href: "/soins-cheveux", image: "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=1200&q=88" },
-  { name: "Soins corps", href: "/soins-corps", image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=1200&q=88" },
-  { name: "Protection solaire", href: "/solaires", image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=1200&q=88" },
+  { name: "Skincare", description: "Soins visage", href: "/skincare", image: "https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=1200&q=88" },
+  { name: "Soins cheveux", description: "Routines capillaires", href: "/soins-cheveux", image: "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=1200&q=88" },
+  { name: "Soins corps", description: "Hydratation & douceur", href: "/soins-corps", image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=1200&q=88" },
+  { name: "Protection solaire", description: "Soins SPF", href: "/solaires", image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=1200&q=88" },
 ];
 
 function OpeningAnimation(){
@@ -84,8 +85,8 @@ export default function HomePage() {
       </section>
 
     <section className="shop-section shop-categories" id="shop-categories">
-      <div className="shop-section-head"><div><p className="shop-eyebrow">SHOP</p><h2>Achetez par catégorie</h2></div></div>
-      <div className="shop-category-grid">{categories.map(category => <a href={category.href} className="shop-category" key={category.href}><div><img src={category.image} alt={`${category.name} disponibles chez Skin by Yas à Agadir`}/></div><h3><span>{category.name}</span><b aria-hidden="true">↗</b></h3></a>)}</div>
+      <div className="shop-section-head"><div><p className="shop-eyebrow">NOS UNIVERS</p><h2>Découvrez nos essentiels</h2><p className="category-section-intro">Des soins sélectionnés pour chaque besoin.</p></div></div>
+      <div className="shop-category-grid">{categories.map((category,index) => <a href={category.href} className="shop-category" key={category.href}><article><Image src={category.image} alt={`${category.name} disponibles chez Skin by Yas à Agadir`} fill unoptimized sizes="(max-width: 700px) 82vw, (max-width: 1024px) 50vw, 25vw"/><span className="category-overlay" aria-hidden="true"></span><span className="shop-category-number">0{index+1}</span><div className="shop-category-content"><span>SKIN BY YAS</span><h3>{category.name}</h3><p>{category.description}</p></div><span className="shop-category-arrow" aria-hidden="true">→</span></article></a>)}</div>
     </section>
 
     <HomeProducts />
