@@ -72,5 +72,30 @@
   .boutique-menu[open] .boutique-dropdown,.boutique-menu:hover .boutique-dropdown,.boutique-menu:focus-within .boutique-dropdown{transform:translate(-50%,0)!important;opacity:1!important;visibility:visible!important}
   .boutique-dropdown a{min-height:0!important;padding:12px 13px!important;font-size:13px!important}
 }
+@media (max-width: 767px) {
+  .shop-actions {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+  }
+
+  .shop-actions .header-search {
+    display: inline-grid !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .shop-actions .header-cart {
+    display: inline-grid !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .shop-actions .shop-menu {
+    display: inline-grid !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
 
 @media(max-width:1024px){.shop-footer .footer-grid>*{grid-column:auto!important}}
