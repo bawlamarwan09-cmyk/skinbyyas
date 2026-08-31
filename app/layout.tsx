@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   icons: { icon: "/brand/logo.jpg" },
   metadataBase: new URL(SITE_URL),
   robots: { index: true, follow: true },
+  verification: {
+    google: "tuSzbcENLtvpSB8-KiATHfe7OlgCOcOlmt09uSM1awk",
+  },
   openGraph: {
     title: "Skin by Yas — Agadir",
     description: "Votre peau, mais en mieux.",
