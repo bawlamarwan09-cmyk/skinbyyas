@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { HomeArticles, HomeBrands, HomeProducts } from "./components/StoreData";
 import { SiteFooter, SiteHeader } from "./components/SiteChrome";
+import type { Article, Brand, Collection, Product } from "./lib/api";
+import { BUSINESS, canonicalUrl } from "./lib/site";
 
 const categories = [
   { name: "Skincare", description: "Soins visage", href: "/skincare", image: "https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=1200&q=88" },
@@ -62,15 +64,28 @@ function OpeningAnimation(){
   </div>;
 }
 
-export default function HomePage() {
+export default function HomePage({
+  initialProducts,
+  initialBrands,
+  initialArticles,
+}: {
+  initialProducts?: Collection<Product>;
+  initialBrands?: Brand[];
+  initialArticles?: Collection<Article>;
+}) {
   const storeSchema = {
     "@context": "https://schema.org",
     "@type": "Store",
-    name: "Skin by Yas",
-    url: "https://skin-by-yas-agadir.bawlamarwan09.chatgpt.site/",
-    image: "https://skin-by-yas-agadir.bawlamarwan09.chatgpt.site/brand/storefront.png",
+    "@id": `${canonicalUrl("/")}#store`,
+    name: BUSINESS.name,
+    url: canonicalUrl("/"),
+    logo: canonicalUrl(BUSINESS.logoPath),
+    image: canonicalUrl(BUSINESS.storefrontPath),
     description: "Parapharmacie, skincare et beauté à Agadir.",
-    areaServed: "Agadir",
+    telephone: BUSINESS.telephone,
+    hasMap: BUSINESS.mapsUrl,
+    sameAs: [BUSINESS.instagramUrl],
+    areaServed: { "@type": "City", name: BUSINESS.city },
   };
 
   return <div className="shop-home">
@@ -89,20 +104,20 @@ export default function HomePage() {
       <div className="shop-category-grid">{categories.map((category,index) => <a href={category.href} className="shop-category" key={category.href}><article><Image src={category.image} alt={`${category.name} disponibles chez Skin by Yas à Agadir`} fill unoptimized sizes="(max-width: 700px) 82vw, (max-width: 1024px) 50vw, 25vw"/><span className="category-overlay" aria-hidden="true"></span><span className="shop-category-number">0{index+1}</span><div className="shop-category-content"><span>SKIN BY YAS</span><h3>{category.name}</h3><p>{category.description}</p></div><span className="shop-category-arrow" aria-hidden="true">→</span></article></a>)}</div>
     </section>
 
-    <HomeProducts />
+    <HomeProducts initialData={initialProducts} />
 
     <section className="shop-editorial">
       <div className="shop-editorial-image"><div className="brand-art"><img src="/brand/logo.jpg" alt="Skin by Yasmine Agadir"/></div></div>
       <div className="shop-editorial-copy"><p className="shop-eyebrow">SKINCARE — SELFCARE — BEAUTY</p><h2>Nos essentiels<br/><span>skincare</span></h2><p>Parcourez notre sélection de produits skincare disponible à Agadir.</p><a href="/skincare" className="shop-button dark">Découvrir le skincare <span>↗</span></a></div>
     </section>
 
-    <HomeBrands />
+    <HomeBrands initialData={initialBrands} />
 
     <section className="shop-section shop-nails">
       <div className="shop-nails-panel"><p className="shop-eyebrow">SKIN BY YAS NAILS</p><h2>Votre espace Nails<br/>à Agadir</h2><p>Découvrez l’espace Nails de Skin by Yas et consultez les prestations actuellement disponibles.</p><a href="/nails-agadir" className="shop-button dark">Découvrir l’espace <span>↗</span></a></div>
     </section>
 
-    <HomeArticles />
+    <HomeArticles initialData={initialArticles} />
 
     <section className="shop-store"><div className="shop-store-copy"><p className="shop-eyebrow">AGADIR, MAROC</p><h2>Retrouvez Skin by Yas à Agadir</h2><p>Parapharmacie, skincare et Nails réunis dans l’univers Skin by Yas.</p><a href="https://share.google/TN4FWEUdYyxXwBF4A" target="_blank" rel="noopener noreferrer" className="shop-button secondary">Ouvrir dans Google Maps <span>↗</span></a></div><div className="shop-store-map"><iframe src="https://www.google.com/maps?q=Skin%20by%20Yas%20Agadir&output=embed" title="Localisation de Skin by Yas à Agadir sur Google Maps" loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen></iframe></div></section>
     </main>

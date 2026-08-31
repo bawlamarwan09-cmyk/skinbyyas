@@ -5,6 +5,7 @@ import { CartPage } from "../components/StoreData";
 export const metadata: Metadata = {
   title: "Votre panier | Skin by Yas",
   description: "Consultez les produits ajoutés à votre panier Skin by Yas.",
+  robots: { index: false, follow: false },
 };
 
 export default function Page() {

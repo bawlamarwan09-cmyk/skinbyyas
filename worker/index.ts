@@ -29,7 +29,27 @@ const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
 
+    if (
+      url.hostname === "www.skinbyyas.com" ||
+      (url.hostname === "skinbyyas.com" && url.protocol === "http:")
+    ) {
+      const destination = new URL(request.url);
+      destination.protocol = "https:";
+      destination.hostname = "skinbyyas.com";
+      return Response.redirect(destination.toString(), 308);
+    }
+
     if (url.pathname === "/_vinext/image") {
+      // Wrangler's local runtime may not expose production image bindings.
+      // Serve same-origin public assets directly instead of crashing the app.
+      if (!env.ASSETS || !env.IMAGES) {
+        const source = url.searchParams.get("url");
+        if (source?.startsWith("/") && !source.startsWith("//") && !source.startsWith("/_vinext/image")) {
+          return handler.fetch(new Request(new URL(source, request.url), request), env, ctx);
+        }
+        return new Response("Image optimization is unavailable.", { status: 503 });
+      }
+
       const allowedWidths = [...DEFAULT_DEVICE_SIZES, ...DEFAULT_IMAGE_SIZES];
       return handleImageOptimization(request, {
         fetchAsset: (path) => env.ASSETS.fetch(new Request(new URL(path, request.url))),

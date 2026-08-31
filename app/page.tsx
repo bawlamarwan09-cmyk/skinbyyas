@@ -1,20 +1,23 @@
 import type { Metadata } from "next";
 import HomePage from "./HomePage";
+import { getArticles, getBrands, getProducts, optional } from "./lib/api";
+import { createPageMetadata } from "./lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Parapharmacie & Skincare à Agadir | Skin by Yas",
   description: "Découvrez Skin by Yas, parapharmacie et skincare à Agadir : produits skincare, cosmétiques, soins cheveux, protection solaire, beauté et espace Nails.",
-  alternates: { canonical: "/" },
-  openGraph: {
-    title: "Parapharmacie & Skincare à Agadir | Skin by Yas",
-    description: "Produits skincare, cosmétiques, soins cheveux, protection solaire et espace Nails chez Skin by Yas à Agadir.",
-    url: "/",
-  },
-};
+  path: "/",
+});
 
-export default function Page() {
+export default async function Page() {
+  const [products, brands, articles] = await Promise.all([
+    optional(getProducts()),
+    optional(getBrands()),
+    optional(getArticles()),
+  ]);
+
   return <>
     <script dangerouslySetInnerHTML={{__html: `try{if(sessionStorage.getItem("sby_intro_seen")){document.documentElement.classList.add("sby-intro-seen")}}catch(e){}`}} />
-    <HomePage />
+    <HomePage initialProducts={products} initialBrands={brands} initialArticles={articles} />
   </>;
 }

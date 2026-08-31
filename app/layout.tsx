@@ -3,12 +3,15 @@ import "./globals.css";
 import "./chrome.css";
 import "./cart.css";
 import "./nails-agadir/nails.css";
+import { JsonLd } from "./components/JsonLd";
+import { BUSINESS, canonicalUrl, SITE_URL } from "./lib/site";
 
 export const metadata: Metadata = {
   title: "Skin by Yas Agadir | Parapharmacie, Skincare & Nails",
   description: "Découvrez Skin by Yas à Agadir : produits skincare, soins cheveux, soins corps, protections solaires et espace nails.",
   icons: { icon: "/brand/logo.jpg" },
-  metadataBase: new URL("https://skin-by-yas-agadir.bawlamarwan09.chatgpt.site"),
+  metadataBase: new URL(SITE_URL),
+  robots: { index: true, follow: true },
   openGraph: {
     title: "Skin by Yas — Agadir",
     description: "Votre peau, mais en mieux.",
@@ -23,5 +26,20 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="fr"><body>{children}</body></html>;
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${SITE_URL}/#website`,
+    name: BUSINESS.name,
+    url: canonicalUrl("/"),
+    inLanguage: "fr-MA",
+    publisher: {
+      "@type": "Organization",
+      name: BUSINESS.name,
+      url: canonicalUrl("/"),
+      logo: canonicalUrl(BUSINESS.logoPath),
+    },
+  };
+
+  return <html lang="fr" suppressHydrationWarning><body><JsonLd data={websiteSchema}/>{children}</body></html>;
 }
