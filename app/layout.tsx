@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import "./chrome.css";
 import "./cart.css";
 import "./nails-agadir/nails.css";
 import { JsonLd } from "./components/JsonLd";
 import { BUSINESS, canonicalUrl, SITE_URL } from "./lib/site";
+
+const GOOGLE_ANALYTICS_ID = "G-M7K2RB3S9R";
 
 export const metadata: Metadata = {
   title: "Skin by Yas Agadir | Parapharmacie, Skincare & Nails",
@@ -44,5 +47,24 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     },
   };
 
-  return <html lang="fr" suppressHydrationWarning><body><JsonLd data={websiteSchema}/>{children}</body></html>;
+  return (
+    <html lang="fr" suppressHydrationWarning>
+      <body>
+        <JsonLd data={websiteSchema} />
+        {children}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GOOGLE_ANALYTICS_ID}');
+          `}
+        </Script>
+      </body>
+    </html>
+  );
 }
