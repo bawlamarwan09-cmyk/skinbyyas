@@ -240,7 +240,7 @@ footer { padding:80px 5vw 30px; background:var(--paper); }
 .shop-button.primary { background:var(--terracotta); color:var(--cream); }
 .shop-button.secondary { border:1px solid #9e8e82; color:var(--ink); }
 .shop-button.dark { background:var(--ink); color:var(--cream); }
-.shop-hero-image { height:650px; overflow:hidden; border-radius:8px 0 0 8px; }
+.shop-hero-image { position:relative; height:650px; overflow:hidden; border-radius:8px 0 0 8px; }
 .shop-hero-image img { height:100%; object-fit:cover; object-position:center 54%; }
 .shop-section { padding:120px 5vw; }
 .shop-section-head { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:48px; }

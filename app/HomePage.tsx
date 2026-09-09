@@ -1,7 +1,5 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { OpeningAnimation } from "./components/OpeningAnimation";
 import { HomeArticles, HomeBrands, HomeProducts } from "./components/StoreData";
 import { SiteFooter, SiteHeader } from "./components/SiteChrome";
 import type { Article, Brand, Collection, Product } from "./lib/api";
@@ -13,56 +11,6 @@ const categories = [
   { name: "Soins corps", description: "Hydratation & douceur", href: "/soins-corps", image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=1200&q=88" },
   { name: "Protection solaire", description: "Soins SPF", href: "/solaires", image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=1200&q=88" },
 ];
-
-function OpeningAnimation(){
-  const [visible, setVisible] = useState(true);
-  const [leaving, setLeaving] = useState(false);
-  const removalTimer = useRef<number | null>(null);
-
-  function finish() {
-    if (leaving) return;
-    sessionStorage.setItem("sby_intro_seen", "1");
-    setLeaving(true);
-    document.body.style.overflow = "";
-    removalTimer.current = window.setTimeout(() => setVisible(false), 650);
-  }
-
-  useEffect(() => {
-    if (sessionStorage.getItem("sby_intro_seen") || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setVisible(false);
-      sessionStorage.setItem("sby_intro_seen", "1");
-      return;
-    }
-
-    document.body.style.overflow = "hidden";
-    const timer = window.setTimeout(finish, 4350);
-    return () => {
-      window.clearTimeout(timer);
-      if (removalTimer.current) window.clearTimeout(removalTimer.current);
-      document.body.style.overflow = "";
-    };
-  }, []);
-
-  if (!visible) return null;
-
-  return <div className={`opening-animation${leaving ? " leaving" : ""}`} aria-label="Introduction Skin by Yas">
-    <div className="opening-scene opening-brand-scene">
-      <div className="opening-brand-mark">
-        <img src="/brand/logo.jpg" alt="Skin by Yas" />
-        <p>Parapharmacie &amp; Skincare<span>Agadir</span></p>
-      </div>
-    </div>
-    <div className="opening-scene opening-storefront-scene">
-      <img src="/brand/intro-storefront.jpg" alt="Façade de la boutique Skin by Yas à Agadir" fetchPriority="high" />
-      <span aria-hidden="true" />
-    </div>
-    <div className="opening-scene opening-interior-scene">
-      <img src="/brand/intro-interior.jpg" alt="Accueil et rayons skincare de la boutique Skin by Yas" fetchPriority="high" />
-      <span aria-hidden="true" />
-    </div>
-    <button type="button" onClick={finish} aria-label="Passer l’introduction">Passer</button>
-  </div>;
-}
 
 export default function HomePage({
   initialProducts,
@@ -96,12 +44,12 @@ export default function HomePage({
     <main>
       <section className="shop-hero">
         <div className="shop-hero-copy"><h1><span className="shop-hero-label">PARAPHARMACIE &amp; SKINCARE À AGADIR</span><span className="sr-only"> — </span><span className="shop-hero-title">Votre peau,<br/><em>en mieux.</em></span></h1><p className="shop-lead">Parapharmacie, skincare &amp; beauté à Agadir.</p><p className="shop-support">Découvrez nos produits skincare à Agadir, cosmétiques, soins cheveux, soins corps et protections solaires.</p><div className="shop-ctas"><a href="/produits" className="shop-button primary">Découvrir les produits beauté <span>↗</span></a><a href="#shop-categories" className="shop-button secondary">Voir nos catégories</a></div></div>
-        <div className="shop-hero-image"><img src="/brand/intro-interior.jpg" alt="Accueil et rayons skincare de la boutique Skin by Yas à Agadir"/></div>
+        <div className="shop-hero-image"><img src="/brand/intro-interior-hero.webp" alt="Accueil et rayons skincare de la boutique Skin by Yas à Agadir" width="1350" height="2400" loading="eager" fetchPriority="high" decoding="async" /></div>
       </section>
 
     <section className="shop-section shop-categories" id="shop-categories">
       <div className="shop-section-head"><div><p className="shop-eyebrow">NOS UNIVERS</p><h2>Découvrez nos essentiels</h2><p className="category-section-intro">Des soins sélectionnés pour chaque besoin.</p></div></div>
-      <div className="shop-category-grid">{categories.map((category,index) => <a href={category.href} className="shop-category" key={category.href}><article><Image src={category.image} alt={`${category.name} disponibles chez Skin by Yas à Agadir`} fill unoptimized sizes="(max-width: 700px) 82vw, (max-width: 1024px) 50vw, 25vw"/><span className="category-overlay" aria-hidden="true"></span><span className="shop-category-number">0{index+1}</span><div className="shop-category-content"><span>SKIN BY YAS</span><h3>{category.name}</h3><p>{category.description}</p></div><span className="shop-category-arrow" aria-hidden="true">→</span></article></a>)}</div>
+      <div className="shop-category-grid">{categories.map((category,index) => <a href={category.href} className="shop-category" key={category.href}><article><Image src={category.image} alt={`${category.name} disponibles chez Skin by Yas à Agadir`} fill sizes="(max-width: 700px) 82vw, (max-width: 1024px) 50vw, 25vw"/><span className="category-overlay" aria-hidden="true"></span><span className="shop-category-number">0{index+1}</span><div className="shop-category-content"><span>SKIN BY YAS</span><h3>{category.name}</h3><p>{category.description}</p></div><span className="shop-category-arrow" aria-hidden="true">→</span></article></a>)}</div>
     </section>
 
     <HomeProducts initialData={initialProducts} />

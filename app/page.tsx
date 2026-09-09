@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { preload } from "react-dom";
 import HomePage from "./HomePage";
 import { getArticles, getBrands, getProducts, optional } from "./lib/api";
 import { createPageMetadata } from "./lib/seo";
@@ -10,6 +11,8 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 export default async function Page() {
+  preload("/brand/intro-interior-hero.webp", { as: "image" });
+
   const [products, brands, articles] = await Promise.all([
     optional(getProducts()),
     optional(getBrands()),
